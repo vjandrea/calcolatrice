@@ -66,6 +66,10 @@ function parseTimeString(string)
         pattern = 'mss';
     } else if(string.length == 4 && /\d\d\d\d/.test(string)) {
         pattern = 'mmss';
+    } else if(string.length == 4 && /\d\.\d\d/.test(string)) {
+        pattern = 'm.ss';
+    } else if(string.length == 5 && /\d\d\.\d\d/.test(string)) {
+        pattern = 'mm.ss';
     } else if(string.length == 5 && /\d\d:\d\d/.test(string)) {
         pattern = 'mm:ss';
     } else if(string.length == 8 && /\d\d:\d\d:\d\d/.test(string)) {
@@ -91,6 +95,8 @@ parseTimeString('02:01:45.43');
 parseTimeString('02:01:45.4');
 parseTimeString('02:01:45');
 parseTimeString('02:01');
+parseTimeString('19.01'); // parse as mm.ss
+parseTimeString('6.01'); // parse as m.ss
 parseTimeString('1901');
 parseTimeString('901');
 parseTimeString('21');
