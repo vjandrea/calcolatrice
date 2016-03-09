@@ -50,6 +50,7 @@ $(document).ready(function () {
 function addTimeString(string)
 {
     console.log('addTimeString(' + string + ')');
+    console.log('parseTimeString: ' + parseTimeString(string));
 
 }
 
@@ -86,6 +87,8 @@ function parseTimeString(string)
     }
 
     console.log('pattern: ' + pattern);
+
+    return pattern;
 }
 
 
