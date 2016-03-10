@@ -12,13 +12,21 @@ let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 400, height: 400, 'node-integration': false});
+  mainWindow = new BrowserWindow({
+      width: 400,
+      height: 200,
+      'node-integration': false,
+      resizable: false,
+      autoHideMenuBar: true,
+      title: 'Calcolatrice',
+      frame: false
+  });
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

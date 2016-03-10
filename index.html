@@ -9,6 +9,11 @@
 <body>
     <div class="row">
         <div class="small-8 small-offset-2 large-8 large-offset-2 columns">
+            <h1 style="margin-top: 20px;">Calcolatrice tempi</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-8 small-offset-2 large-8 large-offset-2 columns">
             <form>
             <input type="text" value="" placeholder="Durata" name="tempo" id="tempo" class="small-8 large-8">
         </form>
@@ -16,21 +21,22 @@
     </div>
     <div class="row">
         <div class="small-8 small-offset-2 large-8 large-offset-2 columns">
-            <div id="totale">
+            <h1 id="totale">
                 TOTALE: <span id="tot_h">00</span>:<span id="tot_m">00</span>:<span id="tot_s">00</span>
-            </div>
+            </h1>
         </div><!-- /large-12-columns -->
     </div><!-- /row -->
 
     <div class="row">
         <div class="small-8 small-offset-2 large-8 large-offset-2 columns">
-            <div style="border: 1px solid red"></div>
+            <div id="ticker"></div>
         </div>
     </div>
 
     <script src="js/vendor/jquery-2.2.1.min.js"></script>
     <script src="js/vendor/what-input.min.js"></script>
     <!-- <script src="js/foundation.js"></script> -->
+    <!-- <script src="js/time.js"></script> -->
     <script src="js/app.js"></script>
 </body>
 </html>
