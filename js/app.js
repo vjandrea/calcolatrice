@@ -34,7 +34,6 @@ $(document).ready(function () {
             case 55: // 7
             case 56: // 8
             case 57: // 9
-                // console.log('Number ' + e.keyCode + ' = ' + String.fromCharCode(e.keyCode));
                 $('#tempo').val($('#tempo').val() + String.fromCharCode(e.keyCode));
                 e.preventDefault();
                 break;
@@ -51,18 +50,26 @@ function addTimeString(string)
 {
     console.log('addTimeString(' + string + ')');
     console.log('parseTimeString: ' + parseTimeString(string));
-
 }
 
 function parseTimeString(string)
 {
     console.log('parseTimeString(' + string + ')');
     var pattern = '';
+    var pieces = new Array;
+    var decimals = 0;
+    var seconds = 0;
+    var minutes = 0;
+    var hours = 0;
 
     if (string.length == 1 && /\d/.test(string)) {
         pattern = 's';
+        seconds = parseInt(string);
+
     } else if(string.length == 2 && /\d\d/.test(string)) {
         pattern = 'ss';
+        seconds = parseInt(string);
+
     } else if(string.length == 3 && /\d\d\d/.test(string)) {
         pattern = 'mss';
     } else if(string.length == 4 && /\d\d\d\d/.test(string)) {
@@ -86,12 +93,11 @@ function parseTimeString(string)
         console.log('lenght: ' + string.length);
     }
 
-    console.log('pattern: ' + pattern);
+    // console.log('pattern: ' + pattern);
+    console.log('seconds: ' + seconds);
 
     return pattern;
 }
-
-
 
 parseTimeString('02:01:45.430');
 parseTimeString('02:01:45.43');
