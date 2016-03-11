@@ -136,10 +136,24 @@ function parseTimeString(string)
         minutes = parseInt(pieces[2]);
         seconds = parseInt(pieces[3]);
 
+    } else if(string.length == 3 && /\d\.\d/.test(string)) {
+        // 2.3
+        pattern = 'm.s';
+        pieces = /(\d)\.(\d)/.exec(string);
+        minutes = parseInt(pieces[1]);
+        seconds = parseInt(pieces[2]);
+
     } else if(string.length == 4 && /\d\.\d\d/.test(string)) {
         // 2.33
         pattern = 'm.ss';
         pieces = /(\d)\.(\d\d)/.exec(string);
+        minutes = parseInt(pieces[1]);
+        seconds = parseInt(pieces[2]);
+
+    } else if(string.length == 4 && /\d\d\.\d/.test(string)) {
+        // 22.3
+        pattern = 'mm.s';
+        pieces = /(\d\d)\.(\d)/.exec(string);
         minutes = parseInt(pieces[1]);
         seconds = parseInt(pieces[2]);
 
@@ -150,10 +164,24 @@ function parseTimeString(string)
         minutes = parseInt(pieces[1]);
         seconds = parseInt(pieces[2]);
 
+    } else if(string.length == 3 && /\d:\d/.test(string)) {
+        // 2:33
+        pattern = 'm:s';
+        pieces = /(\d)\:(\d)/.exec(string);
+        minutes = parseInt(pieces[1]);
+        seconds = parseInt(pieces[2]);
+
     } else if(string.length == 4 && /\d:\d\d/.test(string)) {
         // 2:33
         pattern = 'm:ss';
         pieces = /(\d)\:(\d\d)/.exec(string);
+        minutes = parseInt(pieces[1]);
+        seconds = parseInt(pieces[2]);
+
+    } else if(string.length == 4 && /\d\d:\d/.test(string)) {
+        // 22:33
+        pattern = 'mm:s';
+        pieces = /(\d\d)\:(\d)/.exec(string);
         minutes = parseInt(pieces[1]);
         seconds = parseInt(pieces[2]);
 
@@ -163,6 +191,14 @@ function parseTimeString(string)
         pieces = /(\d\d)\:(\d\d)/.exec(string);
         minutes = parseInt(pieces[1]);
         seconds = parseInt(pieces[2]);
+
+    } else if(string.length == 7 && /\d\d:\d\d.\d/.test(string)) {
+        // 22:33
+        pattern = 'mm:ss.d';
+        pieces = /(\d\d)\:(\d\d)\.(\d)/.exec(string);
+        minutes = parseInt(pieces[1]);
+        seconds = parseInt(pieces[2]);
+        milliseconds = parseInt(pieces[3]) * 100;
 
     } else if(string.length == 7 && /\d:\d\d:\d\d/.test(string)) {
         // 1:22:33
@@ -187,7 +223,7 @@ function parseTimeString(string)
         hours = parseInt(pieces[1]);
         minutes = parseInt(pieces[2]);
         seconds = parseInt(pieces[3]);
-        milliseconds = parseInt(pieces[4]);
+        milliseconds = parseInt(pieces[4]) * 100;
 
     } else if(string.length == 10 && /\d\d:\d\d:\d\d\.\d/.test(string)) {
         // 11:22:33.4
@@ -196,7 +232,7 @@ function parseTimeString(string)
         hours = parseInt(pieces[1]);
         minutes = parseInt(pieces[2]);
         seconds = parseInt(pieces[3]);
-        milliseconds = parseInt(pieces[4]);
+        milliseconds = parseInt(pieces[4]) * 100;
 
     } else if(string.length == 11 && /\d\d:\d\d:\d\d\.\d\d/.test(string)) {
         // 11:22:33.44
@@ -205,7 +241,7 @@ function parseTimeString(string)
         hours = parseInt(pieces[1]);
         minutes = parseInt(pieces[2]);
         seconds = parseInt(pieces[3]);
-        milliseconds = parseInt(pieces[4]);
+        milliseconds = parseInt(pieces[4]) * 10;
 
     } else if(string.length == 10 && /\d:\d\d:\d\d\.\d\d/.test(string)) {
         // 1:22:33.44
@@ -214,7 +250,7 @@ function parseTimeString(string)
         hours = parseInt(pieces[1]);
         minutes = parseInt(pieces[2]);
         seconds = parseInt(pieces[3]);
-        milliseconds = parseInt(pieces[4]);
+        milliseconds = parseInt(pieces[4]) * 10;
 
     } else if(string.length == 11 && /\d:\d\d:\d\d\.\d\d\d/.test(string)) {
         // 1:22:33.444
@@ -235,7 +271,7 @@ function parseTimeString(string)
         milliseconds = parseInt(pieces[4]);
 
     } else {
-        console.log('unrecognized pattern');
+        console.log('unrecognized pattern to match ' + string + ' [' + string.length + ']');
     }
 
     time.setMilliseconds(milliseconds % 1000);
@@ -262,27 +298,27 @@ function zeroPad(number, width)
     width -= number.toString().length;
 
     if ( width > 0 ) {
-        return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+        return new Array(width + (/\./.test(number) ? 2 : 1) ).join('0') + number;
     }
 
     return number.toString();
 }
 
-parseTimeString('11:22:33.444');
-parseTimeString('1:22:33.444');
-parseTimeString('11:22:33.44');
-parseTimeString('1:22:33.44');
-parseTimeString('11:22:33.4');
-parseTimeString('1:22:33.4');
-parseTimeString('11:22:33');
-parseTimeString('1:22:33');
-parseTimeString('22:33');
-parseTimeString('2:33');
-parseTimeString('22.33'); // parse as mm.ss
-parseTimeString('2.33'); // parse as m.ss
-parseTimeString('12233'); // parse as hmmss
-parseTimeString('2233'); // parse as mmss
-parseTimeString('233'); // parse as mss
-parseTimeString('99');
-parseTimeString('33');
-parseTimeString('3');
+// parseTimeString('11:22:33.444');
+// parseTimeString('1:22:33.444');
+// parseTimeString('11:22:33.44');
+// parseTimeString('1:22:33.44');
+// parseTimeString('11:22:33.4');
+// parseTimeString('1:22:33.4');
+// parseTimeString('11:22:33');
+// parseTimeString('1:22:33');
+// parseTimeString('22:33');
+// parseTimeString('2:33');
+// parseTimeString('22.33'); // parse as mm.ss
+// parseTimeString('2.33'); // parse as m.ss
+// parseTimeString('12233'); // parse as hmmss
+// parseTimeString('2233'); // parse as mmss
+// parseTimeString('233'); // parse as mss
+// parseTimeString('99');
+// parseTimeString('33');
+// parseTimeString('3');
